@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dev</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/popup.css">
+</head>
+<body>
+  <div class="popup">
+    <!-- Animated gradient header bar -->
+    <div class="popup-accent-bar"></div>
+
+    <div class="popup-header">
+      <span class="popup-logo">&gt;_ Dev</span>
+      <span class="popup-version">v2.3</span>
+    </div>
+
+    <!-- Username display -->
+    <div class="popup-user" id="popupUser">
+      <div class="popup-avatar" id="popupAvatar">&gt;</div>
+      <div class="popup-user-info">
+        <div class="popup-username" id="popupUsername">Developer</div>
+        <div class="popup-location" id="popupLocation">No location set</div>
+      </div>
+      <div class="popup-badge">
+        <span class="popup-badge-dot"></span>
+        <span>ONLINE</span>
+      </div>
+    </div>
+
+    <!-- Weather Widget -->
+    <div class="popup-weather" id="popupWeather">
+      <div class="popup-weather-main">
+        <span class="popup-weather-icon" id="popupWeatherIcon">🌤️</span>
+        <span class="popup-weather-temp" id="popupWeatherTemp">--</span>
+      </div>
+      <div class="popup-weather-desc" id="popupWeatherDesc">Set city to see weather</div>
+    </div>
+
+    <!-- Username & Location Inputs -->
+    <div class="popup-section">
+      <div class="popup-label">Profile</div>
+      <div class="popup-inputs">
+        <div class="popup-input-group">
+          <span class="popup-input-icon">👤</span>
+          <input type="text" id="popupUsernameInput" class="popup-input" placeholder="Your name" spellcheck="false">
+        </div>
+        <div class="popup-input-group">
+          <span class="popup-input-icon">🌍</span>
+          <input type="text" id="popupCityInput" class="popup-input" placeholder="City (e.g. Mumbai)" spellcheck="false">
+        </div>
+      </div>
+    </div>
+
+    <div class="popup-section">
+      <div class="popup-label">Theme</div>
+      <div class="popup-themes" id="popupThemes">
+        <button class="popup-theme" data-theme="midnight" title="Midnight" style="background: linear-gradient(135deg, #0a0a1a, #7b68ee)"></button>
+        <button class="popup-theme" data-theme="cyberpunk" title="Cyberpunk" style="background: linear-gradient(135deg, #0a001a, #ff003c)"></button>
+        <button class="popup-theme" data-theme="monokai" title="Monokai" style="background: linear-gradient(135deg, #1a1a1a, #f92672)"></button>
+        <button class="popup-theme" data-theme="nord" title="Nord" style="background: linear-gradient(135deg, #2e3440, #88c0d0)"></button>
+        <button class="popup-theme" data-theme="dracula" title="Dracula" style="background: linear-gradient(135deg, #282a36, #ff79c6)"></button>
+        <button class="popup-theme" data-theme="ocean" title="Ocean" style="background: linear-gradient(135deg, #0a1628, #00b4d8)"></button>
+        <button class="popup-theme" data-theme="aurora" title="Aurora" style="background: linear-gradient(135deg, #0a1a0a, #00ff88)"></button>
+        <button class="popup-theme" data-theme="sunset" title="Sunset" style="background: linear-gradient(135deg, #1a0a00, #ff6b35)"></button>
+        <button class="popup-theme rainbow-btn" data-theme="rainbow" title="Rainbow" style="background: linear-gradient(135deg, #ff0080, #ff6a00, #ffde00, #00ff88, #00d4ff, #c44fff)"></button>
+      </div>
+    </div>
+
+    <div class="popup-section">
+      <div class="popup-label">Wallpaper</div>
+      <div class="popup-wallpapers" id="popupWallpapers">
+        <button class="popup-wallpaper" data-wallpaper="mesh" title="Mesh" style="background: linear-gradient(135deg, #667eea, #764ba2)"></button>
+        <button class="popup-wallpaper" data-wallpaper="waves" title="Waves" style="background: linear-gradient(135deg, #0c0c1d, #1a1a3e)"></button>
+        <button class="popup-wallpaper" data-wallpaper="stars" title="Stars" style="background: linear-gradient(135deg, #000011, #0a0a2e)"></button>
+        <button class="popup-wallpaper" data-wallpaper="matrix" title="Matrix" style="background: linear-gradient(135deg, #000a00, #001a00)"></button>
+        <button class="popup-wallpaper" data-wallpaper="neon" title="Neon" style="background: linear-gradient(135deg, #0d0221, #ff006e)"></button>
+        <button class="popup-wallpaper" data-wallpaper="aurora" title="Aurora" style="background: linear-gradient(135deg, #001a0a, #00ff88, #00d4ff)"></button>
+        <button class="popup-wallpaper" data-wallpaper="none" title="None" style="background: #0a0a0f"></button>
+      </div>
+    </div>
+
+    <div class="popup-section">
+      <div class="popup-toggles">
+        <label class="popup-toggle">
+          <span>✨ Particles</span>
+          <input type="checkbox" id="popupParticles">
+          <span class="popup-toggle-slider"></span>
+        </label>
+        <label class="popup-toggle">
+          <span>🕐 Seconds</span>
+          <input type="checkbox" id="popupSeconds">
+          <span class="popup-toggle-slider"></span>
+        </label>
+        <label class="popup-toggle">
+          <span>🎨 Browser FX</span>
+          <input type="checkbox" id="popupBrowserFx">
+          <span class="popup-toggle-slider"></span>
+        </label>
+        <label class="popup-toggle" title="Color Chrome tab bar & toolbar">
+          <span>🌐 Browser Theme</span>
+          <input type="checkbox" id="popupBrowserTheme">
+          <span class="popup-toggle-slider"></span>
+        </label>
+
+      </div>
+    </div>
+
+    <div class="popup-footer">
+      <span class="popup-status"></span> All systems operational
+      <span class="popup-shortcut">Ctrl+Shift+T cycle</span>
+    </div>
+  </div>
+  <script src="js/popup.js"></script>
+</body>
+</html>

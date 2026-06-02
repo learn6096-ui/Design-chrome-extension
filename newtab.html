@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#7b68ee" id="themeColorMeta">
+  <meta name="description" content="DevAesthetic — Premium developer new tab with themes, particles, weather, pomodoro, goals, streaks & more.">
+  <title>&gt;_ Dev — New Tab</title>
+  <!-- Google Fonts: Inter + JetBrains Mono for premium dev feel -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/newtab.css">
+  <!-- Instant theme: apply cached theme/wallpaper before render to eliminate flash -->
+<<<<<<< HEAD
+  <script>
+    try {
+      var _c = JSON.parse(localStorage.getItem('devAesthetic_theme_cache') || '{}');
+      if (_c.theme)    document.body.dataset.theme    = _c.theme;
+      if (_c.wallpaper) document.body.dataset.wallpaper = _c.wallpaper;
+    } catch(e) {}
+  </script>
+=======
+  <script src="js/theme-init.js"></script>
+>>>>>>> 6e18f4b (Developer)
+</head>
+<body data-theme="midnight">
+  <!-- Animated Background -->
+  <div class="bg-layer">
+    <canvas id="particles"></canvas>
+    <div class="mesh-gradient"></div>
+    <div class="grid-overlay"></div>
+    <!-- Animated neon corner glows -->
+    <div class="corner-glow corner-tl"></div>
+    <div class="corner-glow corner-br"></div>
+    <div class="corner-glow corner-tr"></div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="container">
+    <!-- Top Bar -->
+    <header class="top-bar">
+      <div class="top-left">
+        <span class="logo">
+          <span class="logo-bracket">&gt;</span><span class="logo-cursor">_</span> Dev
+        </span>
+      </div>
+      <div class="top-right">
+        <button class="icon-btn" id="focusModeBtn" title="Toggle Focus Mode (Ctrl+F)">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/></svg>
+        </button>
+        <button class="icon-btn" id="wallpaperBtn" title="Change Wallpaper">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+        </button>
+        <button class="icon-btn" id="settingsBtn" title="Settings (Ctrl+,)">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- Center Content -->
+    <main class="center">
+      <!-- User Welcome Card -->
+      <div class="welcome-card" id="welcomeCard">
+        <div class="welcome-avatar" id="welcomeAvatar">&gt;</div>
+        <div class="welcome-info">
+          <div class="welcome-greeting" id="greeting">Welcome, Developer</div>
+          <div class="welcome-sub" id="welcomeSub">// time to ship some code</div>
+        </div>
+        <div class="welcome-badge">
+          <span class="badge-dot"></span>
+          <span class="badge-text">ONLINE</span>
+        </div>
+      </div>
+
+      <!-- Clock -->
+      <div class="clock-section">
+        <div class="clock-wrapper">
+          <span class="clock-time" id="clock">00:00</span><span class="clock-seconds" id="seconds">:00</span>
+        </div>
+        <div class="clock-date" id="date">Loading...</div>
+      </div>
+
+      <!-- Search Bar -->
+      <div class="search-container">
+        <div class="search-bar">
+          <span class="search-prompt">&gt;_</span>
+          <input type="text" id="searchInput" placeholder="Search or type › command..." autocomplete="off" spellcheck="false">
+          <div class="search-engine" id="searchEngine">
+            <span>Google</span>
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+        </div>
+        <div class="search-engines-dropdown" id="enginesDropdown">
+          <div class="engine-option active" data-engine="google">🔍 Google</div>
+          <div class="engine-option" data-engine="github">🐱 GitHub</div>
+          <div class="engine-option" data-engine="stackoverflow">📚 Stack Overflow</div>
+          <div class="engine-option" data-engine="npm">📦 npm</div>
+          <div class="engine-option" data-engine="mdn">📖 MDN</div>
+          <div class="engine-option" data-engine="duckduckgo">🦆 DuckDuckGo</div>
+        </div>
+      </div>
+
+      <!-- Shortcuts Row (Recent Apps + Quick Links aligned in one line) -->
+      <div class="shortcuts-row">
+        <div class="recent-apps" id="recentApps">
+          <!-- Populated by JS -->
+        </div>
+        <div class="shortcuts-divider"></div>
+        <div class="quick-links" id="quickLinks">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+
+      <!-- Widgets Grid -->
+      <div class="widgets-grid">
+        <!-- Row 1: Metrics & Info -->
+        <!-- System Info -->
+        <div class="widget system-widget">
+          <div class="widget-header">
+            <span class="widget-title">⚡ System</span>
+            <span class="widget-dot"></span>
+          </div>
+          <div class="widget-body">
+            <div class="sys-row"><span class="sys-label">Battery</span><span class="sys-value" id="battery">--</span></div>
+            <div class="sys-row"><span class="sys-label">Memory</span><span class="sys-value" id="memory">--</span></div>
+            <div class="sys-row"><span class="sys-label">Connection</span><span class="sys-value" id="connection">--</span></div>
+          </div>
+        </div>
+
+        <!-- Streak -->
+        <div class="widget streak-widget">
+          <div class="widget-header">
+            <span class="widget-title">🔥 Coding Streak</span>
+            <span class="widget-dot active"></span>
+          </div>
+          <div class="widget-body">
+            <div class="streak-display">
+              <span class="streak-count" id="streakCount">0</span>
+              <span class="streak-label">days</span>
+            </div>
+            <div class="streak-bar" id="streakBar"></div>
+            <div class="streak-best">Best: <span id="streakBest">0</span> days 🏆</div>
+          </div>
+        </div>
+
+        <!-- Weather -->
+        <div class="widget weather-widget">
+          <div class="widget-header">
+            <span class="widget-title">🌤 Weather</span>
+            <span class="widget-dot"></span>
+          </div>
+          <div class="widget-body">
+            <div class="weather-main">
+              <span class="weather-icon" id="weatherIcon">--</span>
+              <span class="weather-temp" id="weatherTemp">--</span>
+            </div>
+            <div class="weather-desc" id="weatherDesc">Enter your city in settings</div>
+          </div>
+        </div>
+
+        <!-- Row 2: Action & Productivity -->
+        <!-- Pomodoro Timer -->
+        <div class="widget pomodoro-widget">
+          <div class="widget-header">
+            <span class="widget-title">🍅 Pomodoro</span>
+            <span class="widget-dot active"></span>
+          </div>
+          <div class="widget-body">
+            <div class="pomo-display" id="pomoDisplay">25:00</div>
+            <div class="pomo-controls">
+              <button class="pomo-btn primary" id="pomoStart">Start</button>
+              <button class="pomo-btn" id="pomoReset">Reset</button>
+            </div>
+            <div class="pomo-sessions">
+              <span class="pomo-dot" data-session="1"></span>
+              <span class="pomo-dot" data-session="2"></span>
+              <span class="pomo-dot" data-session="3"></span>
+              <span class="pomo-dot" data-session="4"></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Daily Goals -->
+        <div class="widget goals-widget">
+          <div class="widget-header">
+            <span class="widget-title">🎯 Daily Goals</span>
+            <span class="widget-dot"></span>
+          </div>
+          <div class="widget-body">
+            <div class="goals-list" id="goalsList"></div>
+            <div class="goals-input-wrap">
+              <input type="text" id="goalInput" class="goals-input" placeholder="Add a goal..." spellcheck="false">
+              <button class="goals-add-btn" id="goalAddBtn">+</button>
+            </div>
+            <div class="goals-progress-wrap">
+              <div class="goals-progress">
+                <div class="goals-progress-bar" id="goalProgressBar"></div>
+              </div>
+              <span class="goals-progress-text" id="goalProgressText">0 / 0</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Focus Mode -->
+        <div class="widget focus-widget">
+          <div class="widget-header">
+            <span class="widget-title">🧠 Focus Mode</span>
+            <span class="widget-dot"></span>
+          </div>
+          <div class="widget-body">
+            <div class="focus-timer" id="focusTimer">00:00:00</div>
+            <div class="focus-controls">
+              <button class="focus-btn primary" id="focusStart">Start Focus</button>
+              <button class="focus-btn" id="focusReset">Reset</button>
+            </div>
+            <div class="focus-stats">
+              <div class="focus-stat">
+                <span class="focus-stat-value" id="focusSessions">0</span>
+                <span class="focus-stat-label">Sessions</span>
+              </div>
+              <div class="focus-stat">
+                <span class="focus-stat-value" id="focusMinutes">0</span>
+                <span class="focus-stat-label">Minutes</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Row 3: Utility & Inspiration -->
+        <!-- Notes & Terminal Tabbed Widget -->
+        <div class="widget notes-terminal-widget">
+          <div class="widget-header notes-terminal-tabs">
+            <span class="widget-tab-title active" id="tabNotesBtn">📝 Notes</span>
+            <span class="widget-tab-sep">|</span>
+            <span class="widget-tab-title" id="tabTerminalBtn">&gt;_ Terminal</span>
+            <span class="widget-dot" id="notesTerminalDot"></span>
+          </div>
+          <div class="widget-body">
+            <!-- Notes Tab Content -->
+            <div class="tab-content active" id="tabNotesContent">
+              <textarea id="notesArea" placeholder="// your thoughts here..." spellcheck="false"></textarea>
+            </div>
+            <!-- Terminal Tab Content -->
+            <div class="tab-content" id="tabTerminalContent">
+              <div class="terminal-container">
+                <div class="terminal-output" id="terminalOutput">
+                  <div class="terminal-line">// welcome to dev-sh v2.3</div>
+                  <div class="terminal-line">// type 'help' for commands</div>
+                </div>
+                <div class="terminal-input-row">
+                  <span class="terminal-prompt">&gt;_</span>
+                  <input type="text" id="terminalInput" placeholder="run command..." autocomplete="off" spellcheck="false">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quote -->
+        <div class="widget quote-widget" style="cursor:pointer" title="Click for new quote" id="quoteWidget">
+          <div class="widget-header">
+            <span class="widget-title">💡 Inspiration</span>
+            <span class="widget-dot"></span>
+          </div>
+          <div class="widget-body">
+            <div class="quote-text" id="quoteText">Loading...</div>
+            <div class="quote-author" id="quoteAuthor"></div>
+            <div class="quote-hint">click for new quote</div>
+          </div>
+        </div>
+
+        <!-- Bookmarks -->
+        <div class="widget bookmarks-widget">
+          <div class="widget-header">
+            <span class="widget-title">🔖 Bookmarks</span>
+            <span class="widget-dot"></span>
+          </div>
+          <div class="widget-body">
+            <div class="bookmarks-list" id="bookmarksList"></div>
+            <button class="bookmarks-add" id="bookmarkAddBtn">+ Add Bookmark</button>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-left">
+        <span class="footer-key">Ctrl</span>+<span class="footer-key">K</span> Palette
+        <span class="footer-sep">|</span>
+        <span class="footer-key">Ctrl</span>+<span class="footer-key">Shift</span>+<span class="footer-key">T</span> Theme
+        <span class="footer-sep">|</span>
+        <span class="footer-key">Ctrl</span>+<span class="footer-key">F</span> Focus
+        <span class="footer-sep">|</span>
+        <span class="footer-key">Esc</span> Close
+      </div>
+      <div class="footer-right">
+        <span class="status-indicator"></span> Dev v2.3
+      </div>
+    </footer>
+  </div>
+
+  <!-- Settings Panel -->
+  <div class="settings-panel" id="settingsPanel">
+    <div class="settings-content">
+      <div class="settings-header">
+        <h2>⚙️ Settings</h2>
+        <button class="close-btn" id="closeSettings">&times;</button>
+      </div>
+      <div class="settings-body">
+        <div class="setting-group">
+          <label>Theme</label>
+          <div class="theme-grid" id="themeGrid">
+            <button class="theme-swatch" data-theme="midnight" title="Midnight">
+              <span style="background: linear-gradient(135deg, #0a0a1a, #7b68ee)"></span>
+              <span class="swatch-label">Midnight</span>
+            </button>
+            <button class="theme-swatch" data-theme="cyberpunk" title="Cyberpunk">
+              <span style="background: linear-gradient(135deg, #0a001a, #ff003c)"></span>
+              <span class="swatch-label">Cyberpunk</span>
+            </button>
+            <button class="theme-swatch" data-theme="monokai" title="Monokai">
+              <span style="background: linear-gradient(135deg, #272822, #f92672)"></span>
+              <span class="swatch-label">Monokai</span>
+            </button>
+            <button class="theme-swatch" data-theme="nord" title="Nord">
+              <span style="background: linear-gradient(135deg, #2e3440, #88c0d0)"></span>
+              <span class="swatch-label">Nord</span>
+            </button>
+            <button class="theme-swatch" data-theme="dracula" title="Dracula">
+              <span style="background: linear-gradient(135deg, #282a36, #ff79c6)"></span>
+              <span class="swatch-label">Dracula</span>
+            </button>
+            <button class="theme-swatch" data-theme="ocean" title="Ocean">
+              <span style="background: linear-gradient(135deg, #0a1628, #00b4d8)"></span>
+              <span class="swatch-label">Ocean</span>
+            </button>
+            <button class="theme-swatch" data-theme="aurora" title="Aurora">
+              <span style="background: linear-gradient(135deg, #0a1a0a, #00ff88)"></span>
+              <span class="swatch-label">Aurora</span>
+            </button>
+            <button class="theme-swatch" data-theme="sunset" title="Sunset">
+              <span style="background: linear-gradient(135deg, #1a0a00, #ff6b35)"></span>
+              <span class="swatch-label">Sunset</span>
+            </button>
+            <button class="theme-swatch" data-theme="rainbow" title="Rainbow">
+              <span style="background: linear-gradient(135deg, #ff0080, #ff6a00, #ffde00, #00ff88, #00d4ff, #c44fff)"></span>
+              <span class="swatch-label">Rainbow</span>
+            </button>
+          </div>
+        </div>
+        <div class="setting-group">
+          <label>Wallpaper</label>
+          <div class="wallpaper-grid" id="wallpaperGrid">
+            <button class="wallpaper-swatch active" data-wallpaper="mesh" title="Mesh Gradient">
+              <span style="background: linear-gradient(135deg, #667eea, #764ba2)"></span>
+            </button>
+            <button class="wallpaper-swatch" data-wallpaper="waves" title="Waves">
+              <span style="background: linear-gradient(135deg, #0c0c1d, #1a1a3e)"></span>
+            </button>
+            <button class="wallpaper-swatch" data-wallpaper="stars" title="Starry">
+              <span style="background: linear-gradient(135deg, #000011, #0a0a2e)"></span>
+            </button>
+            <button class="wallpaper-swatch" data-wallpaper="matrix" title="Matrix">
+              <span style="background: linear-gradient(135deg, #000a00, #001a00)"></span>
+            </button>
+            <button class="wallpaper-swatch" data-wallpaper="neon" title="Neon City">
+              <span style="background: linear-gradient(135deg, #0d0221, #ff006e)"></span>
+            </button>
+            <button class="wallpaper-swatch" data-wallpaper="aurora" title="Aurora Borealis">
+              <span style="background: linear-gradient(135deg, #001a0a, #00ff88, #00d4ff)"></span>
+            </button>
+            <button class="wallpaper-swatch" data-wallpaper="none" title="Minimal">
+              <span style="background: #0a0a0f"></span>
+            </button>
+          </div>
+        </div>
+        <div class="setting-group">
+          <label>Clock Format</label>
+          <div class="toggle-group">
+            <button class="toggle-btn active" data-format="24">24H</button>
+            <button class="toggle-btn" data-format="12">12H</button>
+          </div>
+        </div>
+        <div class="setting-group">
+          <label>Show Seconds</label>
+          <div class="toggle-group">
+            <button class="toggle-btn active" data-seconds="true">On</button>
+            <button class="toggle-btn" data-seconds="false">Off</button>
+          </div>
+        </div>
+        <div class="setting-group">
+          <label>Particles</label>
+          <div class="toggle-group">
+            <button class="toggle-btn active" data-particles="true">On</button>
+            <button class="toggle-btn" data-particles="false">Off</button>
+          </div>
+        </div>
+        <div class="setting-group">
+          <label>Browser FX (cursor trail + particles on all pages)</label>
+          <div class="toggle-group">
+            <button class="toggle-btn active" data-browserfx="true">On</button>
+            <button class="toggle-btn" data-browserfx="false">Off</button>
+          </div>
+        </div>
+        <div class="setting-group">
+          <label>Browser Theme (color Chrome tab bar &amp; toolbar)</label>
+          <div class="toggle-group">
+            <button class="toggle-btn active" data-browsertheme="true">On</button>
+            <button class="toggle-btn" data-browsertheme="false">Off</button>
+          </div>
+        </div>
+        <div class="setting-group">
+          <label>Your Name</label>
+          <input type="text" id="usernameInput" class="settings-input" placeholder="e.g. Alex" spellcheck="false">
+        </div>
+        <div class="setting-group">
+          <label>Avatar Letter / Emoji</label>
+          <input type="text" id="avatarInput" class="settings-input" placeholder="e.g. A or 🚀" maxlength="2" spellcheck="false">
+        </div>
+        <div class="setting-group">
+          <label>City (for weather)</label>
+          <input type="text" id="cityInput" class="settings-input" placeholder="e.g. Mumbai, London, New York" spellcheck="false">
+        </div>
+        <div class="setting-group">
+          <label>Custom Tagline</label>
+          <input type="text" id="taglineInput" class="settings-input" placeholder="e.g. Ship fast, break nothing" spellcheck="false">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Wallpaper Picker -->
+  <div class="wallpaper-panel" id="wallpaperPanel">
+    <div class="wallpaper-content">
+      <div class="wallpaper-header">
+        <h2>🖼 Wallpapers</h2>
+        <button class="close-btn" id="closeWallpaper">&times;</button>
+      </div>
+      <div class="wallpaper-preview-grid" id="wallpaperPreviewGrid"></div>
+    </div>
+  </div>
+
+  <!-- Command Palette -->
+  <div class="command-palette" id="commandPalette">
+    <div class="command-content">
+      <div class="command-search-wrap">
+        <span class="command-prefix">⌘</span>
+        <input type="text" id="commandInput" placeholder="Type a command..." spellcheck="false" autocomplete="off">
+      </div>
+      <div class="command-list" id="commandList"></div>
+    </div>
+  </div>
+
+  <script src="js/newtab.js"></script>
+  <!-- Inline script removed for CSP compliance -->
+</body>
+</html>

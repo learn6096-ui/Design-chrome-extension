@@ -1,0 +1,315 @@
+/* DevAesthetic — Content Styles (Full Browser Effects) v2.2 */
+
+/* Theme variables for content script — used by JS injected elements */
+:root[data-dev-aesthetic-theme="midnight"] {
+  --dev-accent: #7b68ee;
+  --dev-accent-rgb: 123, 104, 238;
+  --dev-accent2: #00d4ff;
+  --dev-bg: #050512;
+}
+:root[data-dev-aesthetic-theme="cyberpunk"] {
+  --dev-accent: #ff003c;
+  --dev-accent-rgb: 255, 0, 60;
+  --dev-accent2: #00ffcc;
+  --dev-bg: #060010;
+}
+:root[data-dev-aesthetic-theme="monokai"] {
+  --dev-accent: #f92672;
+  --dev-accent-rgb: 249, 38, 114;
+  --dev-accent2: #a6e22e;
+  --dev-bg: #161611;
+}
+:root[data-dev-aesthetic-theme="nord"] {
+  --dev-accent: #88c0d0;
+  --dev-accent-rgb: 136, 192, 208;
+  --dev-accent2: #a3be8c;
+  --dev-bg: #1e232e;
+}
+:root[data-dev-aesthetic-theme="dracula"] {
+  --dev-accent: #ff79c6;
+  --dev-accent-rgb: 255, 121, 198;
+  --dev-accent2: #50fa7b;
+  --dev-bg: #181924;
+}
+:root[data-dev-aesthetic-theme="ocean"] {
+  --dev-accent: #00b4d8;
+  --dev-accent-rgb: 0, 180, 216;
+  --dev-accent2: #48cae4;
+  --dev-bg: #030e1e;
+}
+:root[data-dev-aesthetic-theme="aurora"] {
+  --dev-accent: #00ff88;
+  --dev-accent-rgb: 0, 255, 136;
+  --dev-accent2: #39ff14;
+  --dev-bg: #040f08;
+}
+:root[data-dev-aesthetic-theme="sunset"] {
+  --dev-accent: #ff6b35;
+  --dev-accent-rgb: 255, 107, 53;
+  --dev-accent2: #ffc107;
+  --dev-bg: #0e0400;
+}
+:root[data-dev-aesthetic-theme="rainbow"] {
+  --dev-accent: #c44fff;
+  --dev-accent-rgb: 196, 79, 255;
+  --dev-accent2: #ff6ec7;
+  --dev-bg: #08040f;
+}
+
+/* Custom Scrollbar for all pages */
+[data-dev-aesthetic-theme] ::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+[data-dev-aesthetic-theme] ::-webkit-scrollbar-track {
+  background: rgba(var(--dev-accent-rgb), 0.04);
+}
+
+[data-dev-aesthetic-theme] ::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--dev-accent), var(--dev-accent2, var(--dev-accent)));
+  border-radius: 4px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+[data-dev-aesthetic-theme] ::-webkit-scrollbar-thumb:hover {
+  filter: brightness(1.25);
+  background-clip: content-box;
+}
+
+/* Animated Top Border Glow — fixed selector to target html element */
+[data-dev-aesthetic-theme]::before {
+  content: '';
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    var(--dev-accent) 25%,
+    rgba(var(--dev-accent-rgb), 0.9) 50%,
+    var(--dev-accent) 75%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: topGlowSlide 3s ease-in-out infinite;
+  box-shadow:
+    0 0 12px var(--dev-accent),
+    0 0 24px rgba(var(--dev-accent-rgb), 0.5),
+    0 0 48px rgba(var(--dev-accent-rgb), 0.25);
+  z-index: 2147483647;
+  pointer-events: none;
+  opacity: 0.75;
+}
+
+@keyframes topGlowSlide {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* Bottom Accent Bar */
+[data-dev-aesthetic-theme]::after {
+  content: '';
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg,
+    transparent,
+    rgba(var(--dev-accent-rgb), 0.35),
+    var(--dev-accent),
+    rgba(var(--dev-accent-rgb), 0.35),
+    transparent
+  );
+  box-shadow: 0 0 12px rgba(var(--dev-accent-rgb), 0.35);
+  z-index: 2147483647;
+  pointer-events: none;
+  opacity: 0.55;
+}
+
+/* Subtle Grid Overlay — only on body, not html (avoids double applying) */
+[data-dev-aesthetic-theme] body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(var(--dev-accent-rgb), 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(var(--dev-accent-rgb), 0.025) 1px, transparent 1px);
+  background-size: 80px 80px;
+  mask-image: radial-gradient(circle at center, black, transparent 80%);
+  -webkit-mask-image: radial-gradient(circle at center, black, transparent 80%);
+  z-index: 2147483636;
+  pointer-events: none;
+  opacity: 0.25;
+}
+
+/* Corner accent — body::after */
+[data-dev-aesthetic-theme] body::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 250px;
+  height: 250px;
+  background: radial-gradient(
+    circle at top right,
+    rgba(var(--dev-accent-rgb), 0.07),
+    transparent 70%
+  );
+  pointer-events: none;
+  z-index: 2147483635;
+}
+
+/* Aesthetic selections */
+[data-dev-aesthetic-theme] ::selection {
+  background: rgba(var(--dev-accent-rgb), 0.32) !important;
+  color: inherit !important;
+}
+
+/* Enhanced focus styles */
+[data-dev-aesthetic-theme] input:focus,
+[data-dev-aesthetic-theme] textarea:focus,
+[data-dev-aesthetic-theme] select:focus {
+  outline: none !important;
+  border-color: var(--dev-accent) !important;
+  box-shadow:
+    0 0 0 2px rgba(var(--dev-accent-rgb), 0.22),
+    0 0 16px rgba(var(--dev-accent-rgb), 0.12) !important;
+}
+
+/* Accent links on hover */
+[data-dev-aesthetic-theme] a:hover {
+  color: var(--dev-accent) !important;
+  text-shadow: 0 0 10px rgba(var(--dev-accent-rgb), 0.35);
+}
+
+/* Button hover glow */
+[data-dev-aesthetic-theme] button:hover {
+  box-shadow: 0 0 14px rgba(var(--dev-accent-rgb), 0.22) !important;
+}
+
+/* Page load animation */
+@keyframes devAestheticPageIn {
+  from {
+    opacity: 0;
+    filter: blur(3px);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+  }
+}
+
+[data-dev-aesthetic-theme] {
+  animation: devAestheticPageIn 0.4s ease-out;
+}
+
+/* BUG FIX: ID was 'dev-aesthetic-cursor' in JS, not 'dev-aesthetic-cursor-canvas' */
+#dev-aesthetic-cursor,
+#dev-aesthetic-particles {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  pointer-events: none !important;
+  z-index: 2147483640 !important;
+}
+
+#dev-aesthetic-particles {
+  z-index: 2147483638 !important;
+  opacity: 0.22 !important;
+}
+
+/* ── Floating Info Widget (username + weather on all tabs) ────── */
+#dev-aesthetic-info-widget {
+  position: fixed;
+  bottom: 14px;
+  right: 14px;
+  z-index: 2147483646;
+  pointer-events: none;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  animation: da-info-slide-in 0.4s ease-out;
+}
+
+@keyframes da-info-slide-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.da-info-inner {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  /* BUG FIX: use theme variable instead of hardcoded dark bg */
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(var(--dev-accent-rgb), 0.25);
+  border-radius: 20px;
+  box-shadow:
+    0 2px 14px rgba(0, 0, 0, 0.35),
+    0 0 24px rgba(var(--dev-accent-rgb), 0.1);
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.85);
+  white-space: nowrap;
+  transition: opacity 0.3s;
+  /* Rainbow gradient top border */
+  position: relative;
+  overflow: hidden;
+}
+
+.da-info-inner::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg,
+    transparent,
+    var(--dev-accent),
+    var(--dev-accent2, var(--dev-accent)),
+    transparent
+  );
+  opacity: 0.7;
+}
+
+.da-info-inner:hover {
+  opacity: 1 !important;
+}
+
+.da-info-user {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-weight: 500;
+}
+
+.da-info-avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--dev-accent), var(--dev-accent2, #00d4ff));
+  color: #000;
+  font-size: 9px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.da-info-sep {
+  color: rgba(var(--dev-accent-rgb), 0.55);
+  font-size: 10px;
+}
+
+.da-info-weather {
+  color: rgba(255,255,255,0.65);
+  font-size: 10px;
+}
